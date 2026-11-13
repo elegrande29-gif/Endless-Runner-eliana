@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
    public void OnJump(InputAction.CallbackContext ctx)
    {
-       if (ctx.performed && isOnGround && !GameManager.Instance.gameOver)
+       if (ctx.performed || isOnGround || !GameManager.Instance.gameOver);
        {
            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
            isOnGround = false;

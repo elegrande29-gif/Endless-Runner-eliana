@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns="UnityEngine.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="root-container" style="flex-grow: 1; padding: 24px; background-color: rgb(32, 34, 37); justify-content: space-between;">
+        
+        <!-- Header Section -->
+        <ui:VisualElement name="header-section" style="border-bottom-width: 2px; border-bottom-color: rgb(79, 84, 92); padding-bottom: 12px; margin-bottom: 16px;">
+            <ui:Label text="Endless Runner" name="title-label" style="font-size: 28px; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: middle-center;" />
+        </ui:VisualElement>
+
+        <!-- Data-Driven Stats Display (Timer & Score) -->
+        <ui:VisualElement name="stats-section" style="flex-direction: row; justify-content: space-around; background-color: rgb(47, 49, 54); padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+            <ui:VisualElement style="align-items: center;">
+                <ui:Label text="TIME" style="font-size: 12px; color: rgb(185, 187, 190);" />
+                <ui:Label text="60s" name="label-timer" style="font-size: 22px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement style="align-items: center;">
+                <ui:Label text="HIGH SCORE" style="font-size: 12px; color: rgb(185, 187, 190);" />
+                <ui:Label text="0" name="label-score" style="font-size: 22px; -unity-font-style: bold; color: rgb(255, 215, 0);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Game Mode Selection (Infinite vs One Minute) -->
+        <ui:VisualElement name="mode-section" style="margin-bottom: 24px;">
+            <ui:Label text="Select Game Mode" style="font-size: 14px; -unity-font-style: bold; color: rgb(200, 200, 200); margin-bottom: 8px; -unity-text-align: middle-center;" />
+            <ui:VisualElement style="flex-direction: row; justify-content: center;">
+                <ui:Button text="Infinite Mode" name="btn-mode-infinite" style="width: 140px; height: 36px; margin-right: 10px;" />
+                <ui:Button text="One Minute" name="btn-mode-oneminute" style="width: 140px; height: 36px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Main Interactive Buttons (Start & Settings) -->
+        <ui:VisualElement name="actions-section" style="align-items: center; margin-top: auto;">
+            <ui:Button text="Start Game" name="btn-start" style="width: 220px; height: 45px; font-size: 18px; -unity-font-style: bold; margin-bottom: 12px; background-color: rgb(67, 181, 129); color: rgb(255, 255, 255);" />
+            <ui:Button text="Settings" name="btn-settings" style="width: 220px; height: 36px; font-size: 14px;" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
