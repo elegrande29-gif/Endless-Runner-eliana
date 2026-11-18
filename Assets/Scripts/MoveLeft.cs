@@ -38,7 +38,7 @@ public class MoveLeft : MonoBehaviour
    // Removes any Obstacle tagged game object if it falls below ground level.
    private void DeleteOutOfScene()
    {
-       if (gameObject.tag == "Obstacle" && transform.position.y < 0)
+       if (gameObject.tag == "Obstacle" && transform.position.x < 0)
        {
            Destroy(gameObject);
        }

@@ -81,13 +81,12 @@ public class PlayerController : MonoBehaviour
     {
         bool isGameOver = GameManager.Instance != null && GameManager.Instance.gameOver;
 
-        if ((collision.gameObject.name == "Ground" || collision.gameObject.CompareTag("Ground")) && !isGameOver)
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-            if (dirtParticle != null) dirtParticle.Play();
+            if (dirtParticle != null && !isGameOver) dirtParticle.Play();
         }
-
-        if (collision.gameObject.CompareTag("Obstacle") && !isGameOver)
+        else if (collision.gameObject.CompareTag("Obstacle") && !isGameOver)
         {
             if (GameManager.Instance != null) GameManager.Instance.gameOver = true;
             playerAnimator.SetBool("Death_b", true);
@@ -100,9 +99,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Scoreable"))
+        bool isGameOver = GameManager.Instance != null && GameManager.Instance.gameOver;
+
+        if ((other.gameObject.CompareTag("Collectible") || other.gameObject.CompareTag("Scoreable")) && !isGameOver)
         {
-            Debug.Log("Received a Score");
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AddScore(5);
+            }
+            Destroy(other.gameObject);
         }
     }
 }
