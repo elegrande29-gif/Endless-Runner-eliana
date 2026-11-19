@@ -1,4 +1,38 @@
-﻿<Solution>
+<Solution>
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Genies.ABTesting.csproj" />
+  <Project Path="Genies.Addressables.csproj" />
+  <Project Path="Genies.ApiResolver.csproj" />
+  <Project Path="Genies.AssetLocations.csproj" />
+  <Project Path="Genies.Assets.Services.csproj" />
+  <Project Path="Genies.Avatars.csproj" />
+  <Project Path="Genies.Avatars.Services.csproj" />
+  <Project Path="Genies.CloudSave.csproj" />
+  <Project Path="Genies.Components.DataModels.csproj" />
+  <Project Path="Genies.Components.ShaderlessTools.csproj" />
+  <Project Path="Genies.CrashReporting.csproj" />
+  <Project Path="Genies.DataRepositoryFramework.csproj" />
+  <Project Path="Genies.DiskCaching.csproj" />
+  <Project Path="Genies.Events.csproj" />
+  <Project Path="Genies.FeatureFlags.csproj" />
+  <Project Path="Genies.Inventory.csproj" />
+  <Project Path="Genies.Login.csproj" />
+  <Project Path="Genies.Login.Native.csproj" />
+  <Project Path="Genies.Naf.csproj" />
+  <Project Path="Genies.NafPlugin.csproj" />
+  <Project Path="Genies.PerformanceMonitoring.csproj" />
+  <Project Path="Genies.Refs.csproj" />
+  <Project Path="Genies.S3Service.csproj" />
+  <Project Path="Genies.ServiceManagement.csproj" />
+  <Project Path="Genies.Services.csproj" />
+  <Project Path="Genies.Services.DynamicConfigs.csproj" />
+  <Project Path="Genies.Shaders.csproj" />
+  <Project Path="Genies.Ugc.csproj" />
+  <Project Path="Genies.Utilities.csproj" />
+  <Project Path="Toolbox.csproj" />
+  <Project Path="UMA_Core.csproj" />
+  <Project Path="UniTask.csproj" />
+  <Project Path="UniTask.TextMeshPro.csproj" />
+  <Project Path="VContainer.csproj" />
 </Solution>
