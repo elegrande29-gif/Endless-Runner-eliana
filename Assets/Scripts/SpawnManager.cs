@@ -12,45 +12,59 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
-        // Offset startDelay by half the repeatRate (3f instead of 2f) with the same 2f interval
         InvokeRepeating("SpawnCollectible", startDelay + (repeatRate / 2f), repeatRate);
+    }
+
+    private float GetRoadHeight(float xPos, float zPos)
+    {
+        RaycastHit[] hits = Physics.RaycastAll(new Vector3(xPos, 8f, zPos), Vector3.down, 20f);
+        float topRoadY = 0f;
+        bool foundGround = false;
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.CompareTag("Ground"))
+            {
+                if (!foundGround || hit.point.y > topRoadY)
+                {
+                    topRoadY = hit.point.y;
+                    foundGround = true;
+                }
+            }
+        }
+
+        return topRoadY;
     }
 
     void SpawnObstacle()
     {
-        if (!GameManager.Instance.gameOver)
+        if ((GameManager.Instance == null || !GameManager.Instance.gameOver) && obstaclePrefab != null)
         {
-            Vector3 spawnPos = obstacleSpawnPos;
+            float roadY = GetRoadHeight(obstacleSpawnPos.x, obstacleSpawnPos.z);
+            Vector3 spawnPos = new Vector3(obstacleSpawnPos.x, roadY, obstacleSpawnPos.z);
 
-            // Detect the exact road height at X = 25 so obstacles sit on top of the sloped street
-            if (Physics.Raycast(new Vector3(spawnPos.x, 50f, spawnPos.z), Vector3.down, out RaycastHit hit, 100f))
+            GameObject obstacle = Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+            if (obstacle.GetComponent<MoveLeft>() == null)
             {
-                spawnPos.y = hit.point.y;
+                obstacle.AddComponent<MoveLeft>();
             }
-
-            Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
-        }
-        else
-        {
-            CancelInvoke();
         }
     }
 
     void SpawnCollectible()
     {
-        if (!GameManager.Instance.gameOver && collectiblePrefab != null)
+        if ((GameManager.Instance == null || !GameManager.Instance.gameOver) && collectiblePrefab != null)
         {
-            // Offset above the road: ground height (+1.2f) or jump height (+3.2f)
-            float randomHeightOffset = Random.Range(0, 2) == 0 ? 1.2f : 3.2f;
-            float groundY = 0f;
+            // Spawn either just above the road (+1.2f) or at jump height (+3.0f)
+            float randomHeightOffset = Random.Range(0, 2) == 0 ? 1.2f : 3.0f;
+            float groundY = GetRoadHeight(obstacleSpawnPos.x, obstacleSpawnPos.z);
 
-            if (Physics.Raycast(new Vector3(25f, 50f, 0f), Vector3.down, out RaycastHit hit, 100f))
+            Vector3 collectiblePos = new Vector3(obstacleSpawnPos.x, groundY + randomHeightOffset, obstacleSpawnPos.z);
+            GameObject collectible = Instantiate(collectiblePrefab, collectiblePos, collectiblePrefab.transform.rotation);
+            if (collectible.GetComponent<MoveLeft>() == null)
             {
-                groundY = hit.point.y;
+                collectible.AddComponent<MoveLeft>();
             }
-
-            Vector3 collectiblePos = new Vector3(25, groundY + randomHeightOffset, 0);
-            Instantiate(collectiblePrefab, collectiblePos, collectiblePrefab.transform.rotation);
         }
     }
 }
